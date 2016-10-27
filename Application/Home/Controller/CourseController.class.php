@@ -1,10 +1,12 @@
 <?php
 namespace Home\Controller;
 use Think\Controller;
-class IndexController extends Controller {
+class CourseController extends Controller {
     public function index()
     {
-        if(isset($_POST['submit'])){
+        $cdb = D('Course');
+//        echo $cdb->test();
+        if(IS_POST){
             print_r($_POST);
         }
         $this->display();

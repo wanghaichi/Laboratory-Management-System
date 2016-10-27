@@ -1,0 +1,12 @@
+body{
+    margin-top: 4%;
+}
+input[type='text']{
+    margin-left: 1%;
+}
+div.checkbox{
+    margin-left: 5%;
+}
+.labelRight{
+    margin-left: 15%;
+}
