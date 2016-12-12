@@ -13,129 +13,35 @@
 <body>
 <div class="container-fluid">
     <div class="col-lg-8 col-lg-offset-2">
-        <table class="table table-bordered">
+        <table  class="table table-bordered">
             <tr>
-                <th>十月</th>
+                <th>第{$week}周</th>
                 <th>星期一</th>
                 <th>星期二</th>
                 <th>星期三</th>
                 <th>星期四</th>
                 <th>星期五</th>
                 <th>星期六</th>
-                <th>星期日</th></tr>
-            <tr>
-                <th>1</th>
-                <td rowspan="2" bgcolor="#faebd7">软件工程概论</td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
+                <th>星期日</th>
             </tr>
-            <tr>
-                <th>2</th>
-                <td></td>
-                <td bgcolor="#f0ffff">编译原理</td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td hidden="true"></td>
-            </tr>
-            <tr>
-                <th>3</th>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-            </tr>
-            <tr>
-                <th>4</th>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-            </tr>
-            <tr>
-                <th>5</th>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-            </tr>
-            <tr>
-                <th>6</th>
-                <td></td>
-                <td bgcolor="#fff8dc">操作系统原理</td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-            </tr>
-            <tr>
-                <th>7</th>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-            </tr>
-            <tr>
-                <th>8</th>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-            </tr>
-            <tr>
-                <th>9</th>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-            </tr>
-            <tr>
-                <th>10</th>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-            </tr>
-            <tr>
-                <th>11</th>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-            </tr>
+            <php>
+                for($i = 1; $i <= 11; $i ++){
+                    echo "<tr>";
+                    echo "<th>$i</th>";
+                    for($j = 1; $j <= 7; $j ++){
+                        if(strlen($weekShow[$j][$i]['color']) > 1){
+                            echo "<td rowspan=".$weekShow[$j][$i]['len']." bgcolor=".$weekShow[$j][$i]['color']." >".$weekShow[$j][$i]['name']."</td>";
+                        }
+                        else if ($weekShow[$j][$i]['len'] == 1){
+                            echo "<td></td>";
+                        }
+                    }
+                    echo "</tr>";
+                }
+            </php>
         </table>
         <div style="border: solid 1px lightgray; padding: 2% 4%">
-            <form role="form" class="form-inline" action="{:U('index')}" method="post">
+            <form role="form" class="form-inline" action="{:U('add_reservation')}" method="post">
                 <div class="row">
                     <div class="col-xs-6">
                         <label for="selectFirstWeek">选择周数</label>

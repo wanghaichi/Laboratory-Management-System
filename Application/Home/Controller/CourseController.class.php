@@ -12,12 +12,66 @@ class CourseController extends Controller {
         $this->db = D('Course');
     }
 
+    public function test(){
+        echo randColor();
+//        echo $this->db->get_now_week();
+    }
 
     public function index()
     {
-//        echo $cdb->test();
-        if(IS_POST){
+        $color = array();
 
+        $week = I('get.week', 1);
+        $courseMap = array();
+        $nowCourse = $this->db
+            ->alias('a')
+            ->field('a.num_day, a.num_course, a.info_id, c.name')
+            ->join('LEFT JOIN lms_reservation_info b ON a.info_id = b.id')
+            ->join('LEFT JOIN lms_course c ON b.course_id = c.id')
+            ->where("a.num_week = %d", $week)
+            ->order("a.num_day, a.num_course")
+            ->select();
+        $weekShow = array();
+        for($i = 1; $i <= 7; $i ++){
+            for($j = 1; $j <= 11; $j ++){
+                $weekShow[$i][$j]['color'] = 0;
+                $weekShow[$i][$j]['head'] = array($i, $j);
+                $weekShow[$i][$j]['len'] = 1;
+                $weekShow[$i][$j]['name'] = "";
+            }
+        }
+        $preid = $preDay = $preCourse = -1;
+        foreach($nowCourse as $i => $v){
+            if($preid != -1){
+                if($preDay == $v['num_day'] && $preid == $v['info_id'] && $preCourse == $v['num_course'] - 1){
+                    $pre = $weekShow[$preDay][$preCourse]['head'];
+                    $weekShow[$pre[0]][$pre[1]]['len'] ++;
+                    $weekShow[$preDay][$preCourse+1]['len'] = 0;
+                    $weekShow[$preDay][$preCourse+1]['head'] = $pre;
+                    $preid = $v['info_id'];
+                    $preDay = $v['num_day'];
+                    $preCourse = $v['num_course'];
+                    continue;
+                }
+            }
+            if(!$courseMap[$v['info_id']]){
+                $res = $courseMap[$v['info_id']] = randColor();
+            }
+            else
+                $res = $courseMap[$v['info_id']];
+            $weekShow[$v['num_day']][$v['num_course']]['color'] = $res;
+            $weekShow[$v['num_day']][$v['num_course']]['name'] = $v['name'];
+            $preid = $v['info_id'];
+            $preDay = $v['num_day'];
+            $preCourse = $v['num_course'];
+        }
+        $this->assign("weekShow", $weekShow);
+        $this->assign("week", $week);
+        $this->display();
+    }
+
+    public function add_reservation(){
+        if(IS_POST){
             $firstWeek  =   I('post.firstWeek');
             $lastWeek   =   I('post.lastWeek');
             $firstDay   =   I('post.firstDay');
@@ -46,15 +100,13 @@ class CourseController extends Controller {
 
             );
             $result = $this->db->insert_reservation($reservationData, $infoData);
-            if($result){
-                echo "1234";
+            if($result['status'] == 1){
+                echo "success";
             }
             else{
                 echo "fail";
             }
             exit;
         }
-        $this->display();
     }
-
 }

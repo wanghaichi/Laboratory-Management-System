@@ -11,3 +11,10 @@ function userIsLogin(){
         redirect('/Home/User/index');
     }
 }
+function randColor(){
+    $colors = array();
+    for($i = 0; $i < 6; $i ++){
+        $colors[] = dechex(rand(0,15));
+    }
+    return '#'.implode('',$colors);
+}

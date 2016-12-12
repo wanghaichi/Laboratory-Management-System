@@ -15,6 +15,11 @@ class CourseModel extends Model {
     {
         parent::__construct();
     }
+    //本学期的第一天
+    public function get_first_day(){
+        //2016年八月二十二日
+        return 1471795200;
+    }
 
     //用来判断当前的年份，以开学的年份为主，比如2016年8月到2017年7月都属于2016学期
     public function get_now_year(){
@@ -25,11 +30,17 @@ class CourseModel extends Model {
         }
         return $nowYear;
     }
-
-    public function test(){
-        echo md5('admin');
-
+    //判断当前属于第几周，参数为待求日期时间戳，否则为当前时间
+    public function get_week($time = -1){
+        $time = $time == -1 ? time() : $time;
+        $days = (time() - $this->get_first_day())/3600/24;
+        $weeks = $days / 7;
+        return ceil($weeks);
     }
+//    public function test(){
+//        echo md5('admin');
+//
+//    }
     /**
      * @param int $firstWeek                    从第几周
      * @param int $lastWeek                     到第几周
@@ -140,7 +151,7 @@ class CourseModel extends Model {
         else{
 
         }
-
+        $res['status'] = 'ok';
         return $res;
     }
 }
