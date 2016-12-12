@@ -27,7 +27,7 @@ class CourseModel extends Model {
     }
 
     public function test(){
-        return "213";
+        echo md5('admin');
 
     }
     /**
@@ -50,7 +50,7 @@ class CourseModel extends Model {
         $parity     = $reservationData['parity'];
         $result = $this->check_reservation($reservationData);
         $res = array();
-        if($result){
+        if($result['status'] == 'ok'){
             $infoModel = D('CourseInfo');
             $infoModel->startTrans();
             $infoRes = $infoModel->insert_info($infoData);
@@ -58,7 +58,6 @@ class CourseModel extends Model {
                 $infoId = $infoRes['id'];
                 $this->startTrans();
                 $flag = true;
-
                 for($i = $firstWeek; $i <= $lastWeek; $i ++){
                     if($parity == 0 && ($i % 2 == 1))
                         continue;
@@ -96,7 +95,7 @@ class CourseModel extends Model {
         }
         else{
             $res['status'] = 0;
-            $res['msg'] = $result;
+            $res['msg'] = $result['msg'];
             return $res;
         }
     }
@@ -109,7 +108,40 @@ class CourseModel extends Model {
         $firstCourse= $reservationData['firstCourse'];
         $lastCourse = $reservationData['lastCourse'];
         $parity     = $reservationData['parity'];
-        return true;
+        $paArr = array();
+        if($parity == 0)
+            $paArr = array('2', '4', '6', '8', '10', '12', '14', '16', '18', '20');
+        else if ($parity == 1)
+            $paArr = array('1', '3', '5', '7', '9', '11', '13', '15', '17', '19');
+        else
+            $paArr = array('2', '4', '6', '8', '10', '12', '14', '16', '18', '20', '1', '3', '5', '7', '9', '11', '13', '15', '17', '19');
+        $map = array(
+            'num_week'  => array(
+                    array('BETWEEN', "$firstWeek, $lastWeek"),
+                    array('IN', $paArr),
+                ),
+            'num_day'   => array('BETWEEN', "$firstDay, $lastDay"),
+            'num_course' => array('BETWEEN', "$firstCourse, $lastCourse"),
+        );
+        $res = $this
+            ->alias('a')
+            ->join('LEFT JOIN lms_reservation_info b ON a.info_id = b.id')
+            ->where($map)->select();
+//        echo "<pre>";
+//        print_r($res);
+//        echo "</pre>";
+//        exit;
+        //查看当前冲突的课程
+        if($res){
+            foreach($res as $i => $v){
+
+            }
+        }
+        else{
+
+        }
+
+        return $res;
     }
 }
 

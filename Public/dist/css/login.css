@@ -1,0 +1,106 @@
+body{
+    margin:0;
+}
+
+input{
+    border:none;
+    padding:5px;
+    outline:medium;
+}
+
+input::-webkit-input-placeholder,textarea::-webkit-input-placeholder{
+    font-family:"Microsoft YaHei",微软雅黑,"MicrosoftJhengHei",华文细黑,STHeiti,MingLiu;
+}
+input:-moz-placeholder,textarea:-moz-placeholder{
+    font-family:"Microsoft YaHei",微软雅黑,"MicrosoftJhengHei",华文细黑,STHeiti,MingLiu;
+}
+input::-moz-placeholder,textarea::-moz-placeholder{
+    font-family:"Microsoft YaHei",微软雅黑,"MicrosoftJhengHei",华文细黑,STHeiti,MingLiu;
+}input:-ms-input-placeholder,textarea:-ms-input-placeholder{
+     font-family:"Microsoft YaHei",微软雅黑,"MicrosoftJhengHei",华文细黑,STHeiti,MingLiu;
+ }
+.feiru{padding:3px;}
+
+#middle{
+    height:50%;
+    margin:3% auto;
+    background-image:url('../img/cp.png');
+    background-repeat:no-repeat;
+    background-size:50% 38%;
+    background-position:50% 0%;
+
+}
+#heart{
+    background-image:url('../img/heart.png');
+    background-position:20% 45%;
+    background-size:80% 35%;
+    background-repeat:no-repeat;
+}
+#head{
+    background-color:#f8f7ea;
+    border-bottom:1px solid #888888;
+}
+#head div{
+    float:left;
+    position:relative;
+    left:40%;
+}
+#head p{
+    font-family:"Microsoft YaHei",微软雅黑,"MicrosoftJhengHei",华文细黑,STHeiti,MingLiu;
+    font-size:2vw;
+    margin-top:5%;
+    margin-bottom:10%;
+}
+
+#forget {
+    font-family:"Microsoft YaHei",微软雅黑,"MicrosoftJhengHei",华文细黑,STHeiti,MingLiu;
+    color:#AA0000;
+    text-decoration:none;
+    float:right;
+    margin-top:2%;
+    margin-right:15%;
+}
+#logbox{
+    position:relative;
+    margin-top:7%;
+    opacity:0;
+}
+.feiru{
+    position:relative;
+    overflow:hidden;
+    border:1px solid #888888;
+    border-radius:5px;
+    margin:0 auto;
+    opacity:0.8;
+    overflow:hidden;
+}
+.feiru img{
+    margin-left:1.5%;
+    float:left;
+}
+.feiru input{
+    float:left;
+    padding-top:0;
+    padding-left:3px;
+    margin-left:3%;
+    text-align:left;
+}
+#button{
+    background-image:url("../img/normal.png");
+    background-size:100% 100%;
+    background-repeat:no-repeat;
+    width:20%;
+    position:relative;
+    left:59%;
+    margin-top:1%;
+}
+
+#button :link{
+    background-image:url("../img/press.png");
+    background-size:100% 100%;
+    background-repeat:no-repeat;
+    width:20%;
+    position:relative;
+    left:59%;
+    top:11%;
+}
