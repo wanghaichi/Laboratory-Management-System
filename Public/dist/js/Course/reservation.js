@@ -92,5 +92,4 @@ function add_reservation(){
             // alert(data.status + data.msg);
         }
     });
-
 }

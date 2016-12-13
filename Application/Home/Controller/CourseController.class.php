@@ -8,8 +8,8 @@ class CourseController extends Controller {
     public function __construct()
     {
         parent::__construct();
-        userIsLogin();
-        $this->db = D('Reservation');
+//        userIsLogin();
+        $this->db = D('ReservationList');
     }
 
     public function test(){
@@ -76,9 +76,9 @@ class CourseController extends Controller {
         $this->display();
     }
 
-    public function course_list_by_week(){
+    public function course_list_by_week($week = 1){
         //当前显示第几周
-        $week = I('get.week', 1);
+//        $week = I('get.week', 1);
         $courseMap = array();
         //查询当前周的排课信息
         $nowCourse = $this->db
@@ -125,7 +125,7 @@ class CourseController extends Controller {
             $preDay = $v['num_day'];
             $preCourse = $v['num_course'];
         }
-        echo json_encode($weekShow);
+        return $weekShow;
     }
 
     public function add_reservation(){
