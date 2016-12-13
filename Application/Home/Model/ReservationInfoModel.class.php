@@ -8,7 +8,7 @@
 
 namespace Home\Model;
 use Think\Model;
-class CourseInfoModel extends Model {
+class ReservationInfoModel extends Model {
     protected $tableName = 'reservation_info';
 
 

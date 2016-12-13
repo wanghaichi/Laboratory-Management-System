@@ -29,6 +29,49 @@
         <div style="border: solid 1px lightgray; padding: 2% 4%">
             <form role="form" class="form-inline" action="<?php echo U('add_reservation');?>" method="post">
                 <div class="row">
+                    <div class="col-xs-4">
+                        <div class="form-group">
+                            <label for="courseid">课程名称</label>
+                            <select id="courseid" name="courseid" class="form-control">
+                                <?php if(is_array($course)): $i = 0; $__LIST__ = $course;if( count($__LIST__)==0 ) : echo "" ;else: foreach($__LIST__ as $key=>$vo): $mod = ($i % 2 );++$i;?><option value="<?php echo ($vo["id"]); ?>"><?php echo ($vo["name"]); ?></option><?php endforeach; endif; else: echo "" ;endif; ?>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-xs-4">
+                        <div class="form-group">
+                            <label for="software">所需软件</label>
+                            <input type="text" class="form-control" id="software" placeholder="">
+                        </div>
+                    </div>
+                    <div class="col-xs-4">
+                        <div class="form-group">
+                            <label for="remark">备注</label>
+                            <input type="text" class="form-control" id="remark" placeholder="">
+                        </div>
+                    </div>
+                </div>
+                <br/>
+                <br/>
+                <div class="row">
+                    <div class="col-xs-6">
+                        <label for="studentCategory">学生类型</label>
+                        <select id="studentCategory" name="studentCategory" class="form-control">
+                            <option value="0">本科生</option>
+                            <option value="1">硕士生</option>
+                            <option value="2">博士生</option>
+                        </select>
+                    </div>
+                    <div class="col-xs-6">
+                        <label for="CourseCategory">教室类型</label>
+                        <select id="CourseCategory" name="CourseCategory" class="form-control">
+                            <option value="0">上课</option>
+                            <option value="1">临时使用</option>
+                        </select>
+                    </div>
+                </div>
+                <br/>
+                <br/>
+                <div class="row">
                     <div class="col-xs-6">
                         <label for="selectFirstWeek">选择周数</label>
                         <select id="selectFirstWeek" name="firstWeek" class="form-control">
@@ -87,7 +130,8 @@
                             <option value="4">星期四</option>
                             <option value="5">星期五</option>
                             <option value="6">星期六</option>
-                            <option value="7">星期日</option></select>
+                            <option value="7">星期日</option>
+                        </select>
                     </div>
                 </div>
                 <br/>
