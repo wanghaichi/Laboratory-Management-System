@@ -5,9 +5,10 @@ class CourseController extends Controller {
     public function index()
     {
         $wang = A('Home/Course');
-        $weekShow = $wang->course_list_by_week();
-
+        $week = I('get.week');
+        $weekShow = $wang->course_list_by_week($week);
         $this->assign('weekShow', $weekShow);
+
         $info = D('Course');
         $courseName = I('get.courseName');
         $danShuangZhou = I('get.danshuangzhou');
