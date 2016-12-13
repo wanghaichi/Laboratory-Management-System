@@ -13,26 +13,18 @@ class ReservationInfoModel extends Model {
 
 
     public function insert_info($infoData){
-        $teacherName        = $infoData['teacherName'];
         $courseId           = $infoData['courseId'];
         $software           = $infoData['software'];
         $studentCategory    = $infoData['studentCategory'];
         $remark             = $infoData['remark'];
-        $classCategary      = $infoData['classCategary'];
+        $CourseCategary      = $infoData['CourseCategary'];
 
-        $teacherName        = "王海弛";
-        $courseId           = "45678932";
-        $software           = "PhotoShop";
-        $studentCategory    = "0";
-        $remark             = "需要多媒体";
-        $classCategary      = "0";
         $data = array(
-            'teacher_name'      => $teacherName,
             'course_id'         => $courseId,
             'software'          => $software,
             'student_category'  => $studentCategory,
             'remark'            => $remark,
-            'class_category'    =>  $classCategary,
+            'class_category'    =>  $CourseCategary,
         );
         $result = $this->add($data);
         $id = $this->getLastInsID();

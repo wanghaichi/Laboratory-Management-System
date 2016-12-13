@@ -129,17 +129,10 @@ class CourseController extends Controller {
     }
 
     public function add_reservation(){
-        print_r($_POST);
-        exit;
         if(IS_POST){
-            $firstWeek  =   I('post.firstWeek');
-            $lastWeek   =   I('post.lastWeek');
-            $firstDay   =   I('post.firstDay');
-            $lastDay    =   I('post.lastDay');
-            $oddWeek    =   I('post.oddWeek');
-            $evenWeek   =   I('post.evenWeek');
-            $firstTime  =   I('post.firstTime');
-            $lastTime   =   I('post.lastTime');
+            $info =   I('post.');
+            $oddWeek    =   $info['oddWeek'];
+            $evenWeek   =   $info['evenWeek'];
             $parity = 0;
             if($oddWeek && $evenWeek){
                 $parity = 2;
@@ -148,24 +141,30 @@ class CourseController extends Controller {
                 $parity = 1;
             }
             $reservationData = array(
-                'firstWeek' => $firstWeek,
-                'lastWeek'  => $lastWeek,
-                'firstDay'  => $firstDay,
-                'lastDay'   => $lastDay,
-                'parity'    => $parity,
-                'firstCourse'=> $firstTime,
-                'lastCourse'=> $lastTime,
+                'firstWeek'     =>  $info['firstWeek'],
+                'lastWeek'      =>  $info['lastWeek'],
+                'firstDay'      =>  $info['firstDay'],
+                'lastDay'       =>  $info['lastDay'],
+                'parity'        =>  $parity,
+                'firstCourse'   =>  $info['firstTime'],
+                'lastCourse'    =>  $info['lastTime'],
             );
             $infoData = array(
-
+                'courseId'          =>  $info['courseid'],
+                'studentCategory'   =>  $info['studentCategory'],
+                'CourseCategory'    =>  $info['CourseCategory'],
+                'software'          =>  $info['software'],
+                'remark'            =>  $info['remark']
             );
             $result = $this->db->insert_reservation($reservationData, $infoData);
-            if($result['status'] == 1){
-                echo "success";
-            }
-            else{
-                echo "fail";
-            }
+//            if($result['status'] == 1){
+//                echo "success";
+//            }
+//            else{
+//                echo "fail";
+//            }
+//
+            echo json_encode($result);
             exit;
         }
     }

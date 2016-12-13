@@ -138,20 +138,13 @@ class ReservationModel extends Model {
             ->alias('a')
             ->join('LEFT JOIN lms_reservation_info b ON a.info_id = b.id')
             ->where($map)->select();
-//        echo "<pre>";
-//        print_r($res);
-//        echo "</pre>";
-//        exit;
         //查看当前冲突的课程
         if($res){
-            foreach($res as $i => $v){
-
-            }
+            $res['status'] = 'error';
         }
         else{
-
+            $res['status'] = 'ok';
         }
-        $res['status'] = 'ok';
         return $res;
     }
 }
