@@ -14,7 +14,7 @@ class CourseModel extends Model {
     public function __construct()
     {
         parent::__construct();
-    }
+}
 
     public function get_course_list(){
         return $this->select();
